@@ -4,8 +4,6 @@ ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 
-gem 'sqlite3' # Use sqlite3 as the database for Active Record
-
 gem 'sass-rails', '~> 5.0' # Use SCSS for stylesheets
 
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
@@ -13,7 +11,7 @@ gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 gem 'coffee-rails', '~> 4.1.0' # Use CoffeeScript for .coffee assets and views
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 gem 'jquery-rails' # Use jquery as the JavaScript library
 
@@ -36,10 +34,43 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'virtus' # Attributes on Steroids for Plain Old Ruby Objects
+
+# Twitter Bootstrap for Rails 3.x - 4 Asset Pipeline
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+
+# Rails I18n de-facto standard library for ActiveRecord model/data translation.
+gem 'globalize'
+
+# Forms made easy for Rails! It's tied to a simple DSL, with no
+# opinion on markup.
+gem 'simple_form'
+
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a
-  # debugger console
-  gem 'byebug'
+  # An IRB alternative and runtime developer console
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
+  gem 'pry-byebug'
+  gem 'hirb'
+  gem 'hirb-unicode'
+
+  gem 'sqlite3'     # Use sqlite3 as the database for Active Record
+  gem 'rspec-rails' # testing framework for Rails 3.x and 4.x.
+
+  gem 'selenium-webdriver' # Personal import of the selenium-webdriver for ruby
+  gem 'capybara'           # Acceptance test framework for web applications
+
+  # Rails Generators for Cucumber with special support for Capybara
+  # and DatabaseCleaner
+  gem 'cucumber-rails', require: false
+
+  # Strategies for cleaning databases in Ruby. Can be used to ensure a
+  # clean state for testing.
+  gem 'database_cleaner'
+
+  gem 'factory_girl_rails', require: false # Factory Girl ♥ Rails
 end
 
 group :development do
@@ -51,3 +82,8 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+  gem 'puma'
+end
