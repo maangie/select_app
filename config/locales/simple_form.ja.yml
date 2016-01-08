@@ -1,0 +1,7 @@
+ja:
+  simple_form:
+    error_notification:
+      default_message: 登録できませんでした...
+  helpers:
+    titles:
+      new: 新規 %{model}

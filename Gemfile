@@ -44,6 +44,8 @@ gem 'twitter-bootstrap-rails'
 # opinion on markup.
 gem 'simple_form'
 
+gem 'rails-i18n' # Rails Locale Data
+
 group :development, :test do
   # An IRB alternative and runtime developer console
   gem 'pry-rails'
@@ -67,10 +69,16 @@ group :development, :test do
   # clean state for testing.
   gem 'database_cleaner'
 
-  gem 'factory_girl_rails', require: false # Factory Girl ♥ Rails
+  gem 'factory_girl_rails' # Factory Girl ♥ Rails
 
   # http://qiita.com/Esfahan/items/55bba810e7cbc30de254
   gem 'sprockets-rails', '~> 2.0' # Sprockets Rails integration
+
+  # A library for generating fake data such as names, addresses, and
+  # phone numbers.
+  gem 'faker'
+
+  gem 'annotate' # Annotate Rails classes with schema and routes info
 end
 
 group :development do
