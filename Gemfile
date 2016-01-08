@@ -73,6 +73,12 @@ group :development, :test do
 
   # http://qiita.com/Esfahan/items/55bba810e7cbc30de254
   gem 'sprockets-rails', '~> 2.0' # Sprockets Rails integration
+
+  # A library for generating fake data such as names, addresses, and
+  # phone numbers.
+  gem 'faker'
+
+  gem 'annotate' # Annotate Rails classes with schema and routes info
 end
 
 group :development do
