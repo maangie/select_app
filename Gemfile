@@ -44,6 +44,8 @@ gem 'twitter-bootstrap-rails'
 # opinion on markup.
 gem 'simple_form'
 
+gem 'rails-i18n' # Rails Locale Data
+
 group :development, :test do
   # An IRB alternative and runtime developer console
   gem 'pry-rails'

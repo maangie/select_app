@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      book: 書籍
+    attributes:
+      book:
+        title: タイトル
+        publish: 出版社
+        created_at: 作成日時
