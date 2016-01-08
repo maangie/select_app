@@ -71,6 +71,9 @@ group :development, :test do
   gem 'database_cleaner'
 
   gem 'factory_girl_rails', require: false # Factory Girl ♥ Rails
+
+  # http://qiita.com/Esfahan/items/55bba810e7cbc30de254
+  gem 'sprockets-rails', '~> 2.0' # Sprockets Rails integration
 end
 
 group :development do
