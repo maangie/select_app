@@ -12,6 +12,7 @@
 
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_publish, only: [:new, :edit]
 
   # GET /books
   # GET /books.json
@@ -43,7 +44,11 @@ class BooksController < ApplicationController
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { render :new }
+        format.html do
+          set_publish
+          render :new
+        end
+
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +62,11 @@ class BooksController < ApplicationController
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
-        format.html { render :edit }
+        format.html do
+          set_publish
+          render :edit
+        end
+
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -77,6 +86,10 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+    end
+
+    def set_publish
+      @publish = Book.select(:publish).uniq.map(&:publish)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
