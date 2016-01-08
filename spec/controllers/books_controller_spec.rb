@@ -31,153 +31,159 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe BooksController, type: :controller do
-
   # This should return the minimal set of attributes required to create a valid
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     {
       title: Faker::Book.title,
       publish: Faker::Book.publisher,
       isbn: Faker::Code.isbn
     }
-  }
+  end
 
-  let(:invalid_attributes) {
+  let(:invalid_attributes) do
     {
       title: '',
       publish: Faker::Book.publisher,
       isbn: Faker::Code.isbn
     }
-  }
+  end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # BooksController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all books as @books" do
+  describe 'GET #index' do
+    it 'assigns all books as @books' do
       book = Book.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:books)).to eq([book])
     end
   end
 
-  describe "GET #show" do
-    it "assigns the requested book as @book" do
+  describe 'GET #show' do
+    it 'assigns the requested book as @book' do
       book = Book.create! valid_attributes
-      get :show, {:id => book.to_param}, valid_session
+      get :show, { id: book.to_param }, valid_session
       expect(assigns(:book)).to eq(book)
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new book as @book" do
+  describe 'GET #new' do
+    it 'assigns a new book as @book' do
       get :new, {}, valid_session
       expect(assigns(:book)).to be_a_new(Book)
     end
   end
 
-  describe "GET #edit" do
-    it "assigns the requested book as @book" do
+  describe 'GET #edit' do
+    it 'assigns the requested book as @book' do
       book = Book.create! valid_attributes
-      get :edit, {:id => book.to_param}, valid_session
+      get :edit, { id: book.to_param }, valid_session
       expect(assigns(:book)).to eq(book)
     end
   end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Book" do
-        expect {
-          post :create, {:book => valid_attributes}, valid_session
-        }.to change(Book, :count).by(1)
+  describe 'POST #create' do
+    context 'with valid params' do
+      it 'creates a new Book' do
+        expect do
+          post :create, { book: valid_attributes }, valid_session
+        end.to change(Book, :count).by(1)
       end
 
-      it "assigns a newly created book as @book" do
-        post :create, {:book => valid_attributes}, valid_session
+      it 'assigns a newly created book as @book' do
+        post :create, { book: valid_attributes }, valid_session
         expect(assigns(:book)).to be_a(Book)
         expect(assigns(:book)).to be_persisted
       end
 
-      it "redirects to the created book" do
-        post :create, {:book => valid_attributes}, valid_session
+      it 'redirects to the created book' do
+        post :create, { book: valid_attributes }, valid_session
         expect(response).to redirect_to(Book.last)
       end
     end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved book as @book" do
-        post :create, {:book => invalid_attributes}, valid_session
+    context 'with invalid params' do
+      it 'assigns a newly created but unsaved book as @book' do
+        post :create, { book: invalid_attributes }, valid_session
         expect(assigns(:book)).to be_a_new(Book)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:book => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        post :create, { book: invalid_attributes }, valid_session
+        expect(response).to render_template('new')
       end
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
+  describe 'PUT #update' do
+    context 'with valid params' do
+      let(:new_attributes) do
         {
           title: Faker::Book.title,
           publish: Faker::Book.publisher,
           isbn: Faker::Code.isbn
         }
-      }
+      end
 
-      it "updates the requested book" do
+      it 'updates the requested book' do
         book = Book.create! valid_attributes
-        put :update, {:id => book.to_param, :book => new_attributes}, valid_session
+        put :update, { id: book.to_param, book: new_attributes }, valid_session
         book.reload
         new_attributes.each { |x| expect(book[x.first]).to eq x.last }
       end
 
-      it "assigns the requested book as @book" do
+      it 'assigns the requested book as @book' do
         book = Book.create! valid_attributes
-        put :update, {:id => book.to_param, :book => valid_attributes}, valid_session
+        put :update, { id: book.to_param, book: valid_attributes },
+            valid_session
+
         expect(assigns(:book)).to eq(book)
       end
 
-      it "redirects to the book" do
+      it 'redirects to the book' do
         book = Book.create! valid_attributes
-        put :update, {:id => book.to_param, :book => valid_attributes}, valid_session
+        put :update, { id: book.to_param, book: valid_attributes },
+            valid_session
+
         expect(response).to redirect_to(book)
       end
     end
 
-    context "with invalid params" do
-      it "assigns the book as @book" do
+    context 'with invalid params' do
+      it 'assigns the book as @book' do
         book = Book.create! valid_attributes
-        put :update, {:id => book.to_param, :book => invalid_attributes}, valid_session
+        put :update, { id: book.to_param, book: invalid_attributes },
+            valid_session
+
         expect(assigns(:book)).to eq(book)
       end
 
       it "re-renders the 'edit' template" do
         book = Book.create! valid_attributes
-        put :update, {:id => book.to_param, :book => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        put :update, { id: book.to_param, book: invalid_attributes },
+            valid_session
+
+        expect(response).to render_template('edit')
       end
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested book" do
+  describe 'DELETE #destroy' do
+    it 'destroys the requested book' do
       book = Book.create! valid_attributes
-      expect {
-        delete :destroy, {:id => book.to_param}, valid_session
-      }.to change(Book, :count).by(-1)
+      expect do
+        delete :destroy, { id: book.to_param }, valid_session
+      end.to change(Book, :count).by(-1)
     end
 
-    it "redirects to the books list" do
+    it 'redirects to the books list' do
       book = Book.create! valid_attributes
-      delete :destroy, {:id => book.to_param}, valid_session
+      delete :destroy, { id: book.to_param }, valid_session
       expect(response).to redirect_to(books_url)
     end
   end
-
 end
