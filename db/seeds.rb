@@ -8,3 +8,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+require 'csv'
+
+Book.destroy_all
+attributes = nil
+
+CSV.foreach('db/books.csv') do |row|
+  unless attributes
+    attributes = row
+    next
+  end
+
+  Book.create! attributes.zip(row).to_h
+end
